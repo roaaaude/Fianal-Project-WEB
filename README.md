@@ -199,20 +199,3 @@ roaa-final-project/
 └── package.json              # Project configuration
 ```
 
-## About the Developer
-
-ShopEasy was founded in 2025 by Roaa, who personally oversees all aspects of the platform to ensure customers receive the best possible experience. From product selection to customer service, Roaa is committed to making online shopping easy and enjoyable for everyone.
-
-## Contact Information
-
-For any inquiries or assistance:
-- Location: 123 Main Street, Ramat Gan, Israel
-- Phone: 050-5551111
-- Email: contact@shopeasy.com
-
-## Development Notes
-
-- Maintain code quality and organization
-- Follow the established folder structure
-- Document new features and API endpoints
-- Test thoroughly before deployment 
