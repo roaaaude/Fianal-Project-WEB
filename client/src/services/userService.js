@@ -2,7 +2,7 @@ import api from './api';
 
 // Get user profile
 export const getUserProfile = async () => {
-  return api.get('/users/profile');
+  return api.get('/auth/profile');
 };
 
 // Update user profile

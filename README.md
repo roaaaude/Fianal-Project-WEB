@@ -4,12 +4,12 @@ A complete e-commerce web application built with React, Node.js, Express, and Mo
 
 ## Project Description
 
-ShopEasy allows users to browse, search, and purchase products across multiple categories. Users can register and log in to access additional features like saving favorite items, adding products to cart, and completing checkout. Admin users have additional capabilities to manage the product inventory.
+ShopEasy allows users to browse, search, and purchase products across multiple categories. Users can register and log in to access additional features like saving favorite items, adding products to cart, and completing checkout. Admin users have additional capabilities to manage the product inventory through a modern dashboard.
 
 The application includes:
 - User authentication with JWT
 - Role-based access control (regular users and admins)
-- Product management with CRUD operations
+- Product management with full CRUD operations (admin dashboard)
 - Shopping cart functionality
 - Checkout process
 - Contact form with validation
@@ -17,6 +17,8 @@ The application includes:
 - Search and filtering functionality
 - Favorite item management
 - Category-based product browsing
+- **Profile update feature for users**
+- **Seed script for easy test data setup**
 
 ## Installation Instructions
 
@@ -54,13 +56,18 @@ JWT_SECRET=your_jwt_secret_key
 NODE_ENV=development
 ```
 
-4. Run the development server:
+4. **Seed the database with test data (recommended for development/testing):**
+```bash
+cd server/src
+node seed.js
+```
+This will populate your database with sample users (including an admin), items, and favorites.
+
+5. Run the development server:
 ```bash
 npm run dev
 ```
-
 This will start both the frontend (React) and backend (Node.js) concurrently.
-
 - Frontend will run on: http://localhost:3000
 - Backend will run on: http://localhost:5000
 
@@ -72,15 +79,20 @@ This will start both the frontend (React) and backend (Node.js) concurrently.
 - Protected routes based on authentication status
 
 ### User Roles
-- Regular User: Can view products, search, filter, manage favorites, and place orders
-- Admin User: Can perform all CRUD operations on products
+- Regular User: Can view products, search, filter, manage favorites, update their profile, and place orders
+- Admin User: Can perform all CRUD operations on products and manage users via the admin dashboard
 
-### Product Management
-- Browse product cards on the homepage
-- View detailed product information on dedicated pages
-- Search functionality to find specific products
-- Filter products based on category, price, and other parameters
-- Switch between different view modes (grid/list)
+### Product Management (Admin Dashboard)
+- **Modern admin dashboard at `/admin`**
+- View all products in a sortable table
+- Create new products (Add Item)
+- Edit existing products (Edit Item)
+- Delete products
+- Only admins can access these features
+
+### Update Profile
+- Users can update their username, email, and password from the Profile page
+- Profile form always shows the latest user info
 
 ### Shopping Cart
 - Add products to cart with quantity selection
@@ -105,10 +117,10 @@ This will start both the frontend (React) and backend (Node.js) concurrently.
 - Location information
 
 ### Admin Features
-- Create new products
-- Edit existing products
-- Delete products
-- Manage users
+- **Admin dashboard for item management**
+- Create, edit, and delete products
+- Only admins can access the dashboard and item CRUD
+- Improved UI for better usability
 
 ## Tech Stack
 
@@ -140,6 +152,7 @@ This will start both the frontend (React) and backend (Node.js) concurrently.
 - GET /api/users/:id - Get a specific user
 - PUT /api/users/:id - Update a user
 - DELETE /api/users/:id - Delete a user (admin only)
+- PUT /api/users/profile - Update current user's profile
 
 ### Products
 - GET /api/items - Get all products

@@ -16,6 +16,9 @@ import Checkout from './pages/Checkout';
 import Favorites from './pages/Favorites';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin';
+import AddItem from './pages/AddItem';
+import EditItem from './pages/EditItem';
 import './assets/styles/global.css';
 
 function App() {
@@ -57,11 +60,26 @@ function App() {
                 
                 {/* Admin Routes */}
                 <Route 
-                  path="/admin/*" 
+                  path="/admin" 
                   element={
                     <ProtectedRoute adminOnly={true}>
-                      {/* Admin components will be added later */}
-                      <div>Admin Dashboard</div>
+                      <Admin />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/admin/add-item" 
+                  element={
+                    <ProtectedRoute adminOnly={true}>
+                      <AddItem />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/admin/edit-item/:id" 
+                  element={
+                    <ProtectedRoute adminOnly={true}>
+                      <EditItem />
                     </ProtectedRoute>
                   } 
                 />

@@ -9,7 +9,7 @@ import Alert from '../components/Alert';
 import '../assets/styles/profile.css';
 
 const Profile = () => {
-  const { user, logout, updateUserData } = useAuth();
+  const { user, logout } = useAuth();
   
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -22,6 +22,18 @@ const Profile = () => {
     fetchUserProfile();
   }, []);
   
+  // Update form values when user context changes
+  useEffect(() => {
+    if (user) {
+      formik.setValues((prev) => ({
+        ...prev,
+        username: user.username || '',
+        email: user.email || '',
+      }));
+    }
+    // eslint-disable-next-line
+  }, [user]);
+  
   const fetchUserProfile = async () => {
     setLoading(true);
     setError('');
@@ -31,8 +43,8 @@ const Profile = () => {
       
       // Initialize form with user data
       formik.setValues({
-        username: response.data.username || '',
-        email: response.data.email || '',
+        username: response.data.data.username || '',
+        email: response.data.data.email || '',
         currentPassword: '',
         newPassword: '',
         confirmPassword: '',
@@ -116,13 +128,9 @@ const Profile = () => {
         }
         
         // Update profile
-        const response = await updateUserProfile(updateData);
-        
-        // Update auth context
-        updateUserData({
-          username: values.username,
-          email: values.email
-        });
+        await updateUserProfile(updateData);
+        // Fetch latest profile and update form
+        await fetchUserProfile();
         
         // Reset password fields
         formik.setFieldValue('currentPassword', '');

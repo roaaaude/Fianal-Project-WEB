@@ -135,9 +135,67 @@ const deleteUser = async (req, res) => {
   }
 };
 
+/**
+ * @desc    Update current user's profile
+ * @route   PUT /api/users/profile
+ * @access  Private
+ */
+const updateProfile = async (req, res) => {
+  try {
+    // Find user by ID from auth middleware
+    let user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+      });
+    }
+
+    // Fields that can be updated
+    const { username, email, profilePicture, currentPassword, newPassword } = req.body;
+
+    if (username) user.username = username;
+    if (email) user.email = email;
+    if (profilePicture) user.profilePicture = profilePicture;
+
+    // Handle password change
+    if (newPassword) {
+      if (!currentPassword) {
+        return res.status(400).json({
+          success: false,
+          message: 'Current password is required to change password',
+        });
+      }
+      const isMatch = await user.comparePassword(currentPassword);
+      if (!isMatch) {
+        return res.status(400).json({
+          success: false,
+          message: 'Current password is incorrect',
+        });
+      }
+      user.password = newPassword; // Will be hashed by pre-save hook
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while updating profile',
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   getUsers,
   getUserById,
   updateUser,
   deleteUser,
+  updateProfile,
 }; 
