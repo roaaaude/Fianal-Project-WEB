@@ -19,7 +19,7 @@ const Profile = () => {
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   
   useEffect(() => {
-    fetchUserProfile();
+    fetchUserProfile(); // eslint-disable-line react-hooks/exhaustive-deps
   }, []);
   
   // Update form values when user context changes
