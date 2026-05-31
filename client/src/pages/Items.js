@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaSearch, FaFilter, FaTimes, FaStar, FaSort, FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
+import { FaSearch, FaFilter, FaTimes, FaStar, FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
 import { getItems, getItemsByCategory } from '../services/itemService';
 import { getFavorites, addFavorite, removeFavorite } from '../services/favoriteService';
 import { useAuth } from '../context/AuthContext';
@@ -80,7 +80,7 @@ const Items = () => {
   // Fetch items when search, filters, sort or pagination changes
   useEffect(() => {
     console.log('Fetching items with filters:', filters);
-    fetchItems();
+    fetchItems(); // eslint-disable-line react-hooks/exhaustive-deps
     
     // Update URL with search and category parameters
     const params = new URLSearchParams();
@@ -94,7 +94,7 @@ const Items = () => {
   // Fetch user favorites if authenticated
   useEffect(() => {
     if (isAuthenticated) {
-      fetchFavorites();
+      fetchFavorites(); // eslint-disable-line react-hooks/exhaustive-deps
     }
   }, [isAuthenticated]);
 

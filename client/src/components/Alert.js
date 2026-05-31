@@ -5,18 +5,15 @@ const Alert = ({ type = 'info', message, dismissible = true, timeout = 5000, onC
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Reset visibility whenever message changes
     setIsVisible(true);
-    
-    // Auto-close after timeout if dismissible
     if (dismissible && timeout > 0) {
       const timer = setTimeout(() => {
-        dismissAlert();
+        setIsVisible(false);
+        if (onClose) onClose();
       }, timeout);
-      
       return () => clearTimeout(timer);
     }
-  }, [message, dismissible, timeout]);
+  }, [message, dismissible, timeout, onClose]);
 
   const dismissAlert = () => {
     setIsVisible(false);
