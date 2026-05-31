@@ -27,6 +27,17 @@
   gap: 0.65rem;
 }
 
+.logo-img {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-fallback {
+  display: flex;
+  align-items: center;
+}
+
 .logo-icon {
   display: flex;
   align-items: center;

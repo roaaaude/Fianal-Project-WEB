@@ -27,21 +27,17 @@ const Header = () => {
         <nav className="navbar">
           <Link to="/" className="navbar-logo" onClick={closeMenu}>
             <div className="logo-container">
-              <div className="logo-icon">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                  <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="#c9a84c" strokeWidth="2" fill="none"/>
-                  <rect x="11" y="13" width="6" height="10" rx="1" fill="#c9a84c"/>
-                  <rect x="19" y="15" width="6" height="8" rx="3" fill="#c9a84c"/>
-                  <line x1="9" y1="23" x2="27" y2="23" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round"/>
-                  <circle cx="12" cy="24.5" r="1.5" fill="#c9a84c"/>
-                  <circle cx="24" cy="24.5" r="1.5" fill="#c9a84c"/>
-                  <line x1="14" y1="10" x2="14" y2="8" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round"/>
-                  <line x1="22" y1="12" x2="24" y2="10" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <div className="logo-text">
-                <span className="logo-name">VENESIA</span>
-                <span className="logo-sub">Medical Laser Company</span>
+              <img
+                src="/logo.png"
+                alt="VENESIA Medical Laser Company"
+                className="logo-img"
+                onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+              />
+              <div className="logo-fallback" style={{ display: 'none' }}>
+                <div className="logo-text">
+                  <span className="logo-name">VENESIA</span>
+                  <span className="logo-sub">Medical Laser Company</span>
+                </div>
               </div>
             </div>
           </Link>
